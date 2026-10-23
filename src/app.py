@@ -1,15 +1,20 @@
-from tools.ec2 import get_ec2_instances
+
+from tools.ec2 import get_stopped_instances
+
 
 def main():
-    instances = get_ec2_instances()
+    instances = get_stopped_instances()
 
-    print("\nEC2 Instances")
+    print("\nStopped EC2 Instances")
     print("-" * 50)
+
+    if not instances:
+        print("No stopped instances found.")
+        return
 
     for instance in instances:
         print(f"Name:    {instance['name']}")
         print(f"ID:      {instance['id']}")
-        print(f"State:   {instance['state']}")
         print(f"Type:    {instance['instance_type']}")
         print("-" * 50)
 

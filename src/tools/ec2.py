@@ -35,3 +35,12 @@ def get_ec2_instances(ec2_client=None):
 
     return instances
 
+def get_stopped_instances(ec2_client=None):
+    """Return only EC2 instances currently in the stopped state."""
+    instances = get_ec2_instances(ec2_client)
+
+    return [
+        instance
+        for instance in instances
+        if instance["state"] == "stopped"
+    ]
